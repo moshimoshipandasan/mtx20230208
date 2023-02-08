@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello World Animation</title>
+  <title>Alphabet Animation</title>
 </head>
 <body>
-  <h1 id="hello">こんにちは</h1>
+  <div id="alphabets">
+    <span class="alphabet">A</span>
+    <span class="alphabet">B</span>
+    <span class="alphabet">C</span>
+    <span class="alphabet">D</span>
+    <span class="alphabet">E</span>
+  </div>
+  <style>
+    .alphabet {
+      position: absolute;
+    }
+  </style>
   <script>
-    const hello = document.getElementById("hello");
-    let top = 0;
+    const alphabets = document.getElementsByClassName("alphabet");
+    let tops = [];
+    for (let i = 0; i < alphabets.length; i++) {
+      tops.push(Math.floor(Math.random() * window.innerHeight));
+    }
 
     setInterval(function() {
-      hello.style.top = top + "px";
-      top++;
-      if (top > window.innerHeight) {
-        top = 0;
+      for (let i = 0; i < alphabets.length; i++) {
+        alphabets[i].style.top = tops[i] + "px";
+        tops[i]++;
+        if (tops[i] > window.innerHeight) {
+          tops[i] = 0;
+        }
       }
     }, 30);
   </script>

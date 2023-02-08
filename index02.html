@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alphabet Animation</title>
+</head>
+<body>
+  <div id="alphabets"></div>
+  <style>
+    .alphabet {
+      position: absolute;
+    }
+  </style>
+  <script>
+    const alphabetsContainer = document.getElementById("alphabets");
+    const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const fontSize = 16;
+    const columns = window.innerWidth / fontSize;
+
+    for (let i = 0; i < columns; i++) {
+      let column = document.createElement("div");
+      column.style.position = "absolute";
+      column.style.left = i * fontSize + "px";
+      column.style.width = fontSize + "px";
+      column.style.height = window.innerHeight + "px";
+      alphabetsContainer.appendChild(column);
+
+      for (let j = 0; j < 10; j++) {
+        let alphabet = document.createElement("span");
+        alphabet.innerHTML = alphabets[Math.floor(Math.random() * alphabets.length)];
+        alphabet.style.position = "absolute";
+        alphabet.style.left = 0;
+        alphabet.style.top = j * fontSize * 5 + "px";
+        alphabet.style.fontSize = fontSize + "px";
+        column.appendChild(alphabet);
+      }
+    }
+
+    setInterval(function() {
+      let spans = alphabetsContainer.getElementsByTagName("span");
+      for (let i = 0; i < spans.length; i++) {
+        spans[i].style.top = (parseInt(spans[i].style.top) + fontSize) + "px";
+        if (parseInt(spans[i].style.top) > window.innerHeight) {
+          spans[i].style.top = -fontSize + "px";
+        }
+      }
+    }, 30);
+  </script>
+</body>
+</html>
